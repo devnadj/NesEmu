@@ -4,9 +4,11 @@ NESEmu is a Nes Emulator
 
 
 Plateforms
-    Windows
-    Linux
-    Mac
+- Windows
+- Linux
+- Mac
+- any web browser
 
 Language
-    C#
+- C#
+- JavaScript
