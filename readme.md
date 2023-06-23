@@ -16,7 +16,7 @@ Languages
 
 # Documentation search
 
-![image](https://github.com/devnadj/NesEmu/tree/main/img/NES-Console-Set)
+![image](https://github.com/devnadj/NesEmu/tree/main/img/NES-Console-Set.png)
 
 - Introduction
 - Schematic of the NES
