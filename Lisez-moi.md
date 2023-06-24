@@ -12,7 +12,10 @@ NESEmu est a émulateur pour la console de nintendo NES. Il sera disponible pour
 - C# (pour la version ordinateur)
 - JavaScript (pour la version navigateur)
 
-![NES : version américaine et européenne](https://github.com/devnadj/NesEmu/blob/main/img/NES-Console-Set.png?raw=true "NES : version américaine et européenne")
+![NES : version américaine et européenne](https://github.com/devnadj/NesEmu/blob/main/img/NES-Console-Set.png?raw=true)
+**NES : lancée le 18/10/1985 aux États-Unis et le 01/09/1985 en Europe.**
+
+![Famicom : version américaine et européenne](https://github.com/devnadj/NesEmu/blob/main/famicom?raw=true) **Famicom : lancée le 15/07/1983 au Japon.**
 
 - [Introduction](#introduction)
 - [Schémas de la console](#schémas-de-la-console)
