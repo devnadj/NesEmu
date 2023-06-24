@@ -1,6 +1,10 @@
 # NESEmu
 
+<<<<<<< HEAD
 NESEmu est une émulateur pour la console de nintendo NES. Il sera disponible pour les systèmes suivants :
+=======
+NESEmu est un émulateur pour la console de nintendo NES. Il sera disponible pour les systèmes suivants :
+>>>>>>> f8eae2979f114bfb3825248c0dd7626168868e8d
 
 - Windows
 - Linux
@@ -41,7 +45,7 @@ La Nintendo Entertainment System (NES) est une console de jeux vidéo 8 bits de 
 
 # Recherche de documentation
 
-La chose la plus importante avant de commencer à écrire la moindre ligne de code, est de rechercher de la documentation sur la console. Les sources d'informations sont légions, mais toujours très claires et souvent très disparates. Il est donc nécessaire d'analyser les entrailles de la console pour en étudier les composants principaux. Pas besoin pour cela de posséder la console, d'autres l'ont fait bien avant nous.
+La chose la plus importante avant de commencer à écrire la moindre ligne de code, est de rechercher de la documentation sur la console. Les sources d'informations sont légions, mais pas toujours très claires et souvent très disparates. Il est donc nécessaire d'analyser les entrailles de la console pour en étudier les composants principaux. Pas besoin pour cela de posséder la console, d'autres l'ont fait bien avant nous.
 
 # Schémas de la console
 
