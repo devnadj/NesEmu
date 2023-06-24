@@ -1,6 +1,6 @@
 # NESEmu
 
-NESEmu est a émulateur pour la console de nintendo NES. Il sera disponible pour les systèmes suivants :
+NESEmu est une émulateur pour la console de nintendo NES. Il sera disponible pour les systèmes suivants :
 
 - Windows
 - Linux
