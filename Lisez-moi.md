@@ -1,17 +1,5 @@
 # NESEmu
 
-NESEmu est un émulateur pour la console de nintendo NES/Famicom. Il sera disponible pour les systèmes suivants :
-
-- Windows
-- Linux
-- Mac
-- et la plupart des navigateurs internet
-
-**Langages de programmation utilisés**
-
-- C# (pour la version ordinateur)
-- JavaScript (pour la version navigateur)
-
 - [Introduction](#introduction)
 - [Schémas de la console](#schémas-de-la-console)
 - [Le processeur](#le-processeur)
@@ -21,12 +9,12 @@ NESEmu est un émulateur pour la console de nintendo NES/Famicom. Il sera dispon
     - [Les modes d'addressage](#les-modes-dadressage)
       - [Accumulateur](#)
       - [Adressage immédiat](#adressage-immédiat)
-      - Absolute
-      - Absolute, X
-      - Absolute, Y
-      - Zero Page
-      - Implied
-    - The instructions of the 6502
+      - [Absolute]()
+      - [Absolute, X]()
+      - [Absolute, Y]()
+      - [Zero Page]()
+      - [Implied]()
+    - [Les instructions du 6502](#les-instructions)
     - NTSC version, named Ricoh 2A03 or RP2A03, running at 1.79 MHz.
     - PAL version, named Ricoh 2A07 or RP2A07, running at 1.66 MHz.
     - Cartridges
@@ -45,7 +33,7 @@ La Nintendo Entertainment System (NES) est une console de jeux vidéo 8 bits de 
 
 # Recherche de documentation
 
-La chose la plus importante avant de commencer à écrire la moindre ligne de code, est de rechercher de la documentation sur la console. Les sources d'informations sont légions, mais pas toujours très claires et souvent très disparates. Il est donc nécessaire d'analyser les entrailles de la console pour en étudier les composants principaux. Pas besoin pour cela de posséder la console, d'autres l'ont fait bien avant nous.
+La chose la plus importante avant de commencer à écrire la moindre ligne de code, est de rechercher de la documentation sur la console. Les sources d'informations sont légion, mais pas toujours très claires et souvent très disparates. Il est donc nécessaire d'analyser les entrailles de la console pour en étudier les composants principaux. Pas besoin pour cela de posséder la console, d'autres l'ont fait bien avant nous.
 
 # Entrailles de la console
 
@@ -61,28 +49,36 @@ La chose la plus importante avant de commencer à écrire la moindre ligne de co
 
 # Le processeur
 
-# Le processeur 6502
+## Le processeur 6502
 
-## Diagrammes
+### Diagrammes
 
-## Les registres
+### Les registres
 
-## Les modes d'adressage
+### Les modes d'adressage
 
-### Adressage
+#### Adressage
 
-### Adressage immédiat
+#### Adressage immédiat
 
-### Adressage absolue
+#### Adressage absolue
 
-### Adressage absolu
+#### Adressage absolu
 
-## Les vecteurs d'interruption
+### Les vecteurs d'interruption
 
-### Reset
+#### Reset
 
-### IRQ
+#### IRQ
 
 ### NMI
 
-![image](https://github.com/devnadj/NesEmu/blob/main/img/mario.png)
+### Les instructions du 6502
+
+### Émulation du 6502
+
+# Les cartouches
+
+# Les manettes
+
+![image](img/mario.png)
