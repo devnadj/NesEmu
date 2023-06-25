@@ -6,6 +6,7 @@
   - [Le processeur 6502](#le-processeur-6502)
     - [Diagrammes](#diagrammes)
     - [Les registres](#les-registres)
+      - [L'accumulateur](#laccumulateur)
     - [Les modes d'addressage](#les-modes-dadressage)
       - [Accumulateur](#)
       - [Adressage immédiat](#adressage-immédiat)
@@ -17,7 +18,8 @@
     - [Les instructions du 6502](#les-instructions)
     - NTSC version, named Ricoh 2A03 or RP2A03, running at 1.79 MHz.
     - PAL version, named Ricoh 2A07 or RP2A07, running at 1.66 MHz.
-    - Cartridges
+    - [Les cartouches de jeu](#les-cartouches)
+    - [Les manettes](#les-manettes)
 
 # Introduction
 
@@ -53,7 +55,9 @@ La chose la plus importante avant de commencer à écrire la moindre ligne de co
 
 ### Diagrammes
 
-### Les registres
+### Les registres du 6502
+
+#### L'accumulateur
 
 ### Les modes d'adressage
 
@@ -75,7 +79,25 @@ La chose la plus importante avant de commencer à écrire la moindre ligne de co
 
 ### Les instructions du 6502
 
+#### ADC (ADd with Carry)
+
+Drapaux affectés : N V Z C
+
+|             |             |     |        |        |
+| ----------- | ----------- | --- | ------ | ------ |
+| Mode        | Syntaxe     | HEX | Taille | Cycles |
+| Immediate   | ADC #$44    | $69 | 2      | 2      |
+| Zero Page   | ADC $44     | $65 | 2      | 3      |
+| Zero Page,X | ADC $44,X   | $75 | 2      | 4      |
+| Absolute    | ADC $4400   | $6D | 3      | 4      |
+| Absolute,X  | ADC $4400,X | $7D | 3      | 4+     |
+| Absolute,Y  | ADC $4400,Y | $79 | 3      | 4+     |
+| Indirect,X  | ADC ($44,X) | $61 | 2      | 6      |
+| Indirect,Y  | ADC ($44),Y | $71 | 2      | 5+     |
+
 ### Émulation du 6502
+
+# Le PPU
 
 # Les cartouches
 
