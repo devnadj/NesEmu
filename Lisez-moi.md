@@ -82,39 +82,37 @@ La chose la plus importante avant de commencer à écrire la moindre ligne de co
 #### **ADC (ADd with Carry) - Addition avec retenue**
 
 Drapeaux affectés : N V Z C
-
-|             |             |         |            |            |
+| | | | | |
 | ----------- | ----------- | ------- | ---------- | ---------- |
-| **Mode**    | **Syntaxe** | **HEX** | **Taille** | **Cycles** |
-| Immediate   | ADC #$44    | $69     | 2          | 2          |
-| Zero Page   | ADC $44     | $65     | 2          | 3          |
-| Zero Page,X | ADC $44,X   | $75     | 2          | 4          |
-| Absolute    | ADC $4400   | $6D     | 3          | 4          |
-| Absolute,X  | ADC $4400,X | $7D     | 3          | 4+         |
-| Absolute,Y  | ADC $4400,Y | $79     | 3          | 4+         |
-| Indirect,X  | ADC ($44,X) | $61     | 2          | 6          |
-| Indirect,Y  | ADC ($44),Y | $71     | 2          | 5+         |
+| **Mode** | **Syntaxe** | **HEX** | **Taille** | **Cycles** |
+| Immediate | ADC #$44 | $69 | 2 | 2 |
+| Zero Page | ADC $44 | $65 | 2 | 3 |
+| Zero Page,X | ADC $44,X | $75 | 2 | 4 |
+| Absolute | ADC $4400 | $6D | 3 | 4 |
+| Absolute,X | ADC $4400,X | $7D | 3 | 4+ |
+| Absolute,Y | ADC $4400,Y | $79 | 3 | 4+ |
+| Indirect,X | ADC ($44,X) | $61 | 2 | 6 |
+| Indirect,Y | ADC ($44),Y | $71 | 2 | 5+ |
 
 - ajouter 1 cycle si la limite de page est franchie
 
 Les résultats de l'instruction ADC dépendent de la position de l'indicateur décimal. En mode décimal, l'addition est effectuée en supposant que les valeurs concernées sont emballées en BCD (Binary Coded Decimal).
 Il n'y a aucun moyen d'additionner sans retenue.
 
-#### **AND (Et bit à bit avec l'accumulator)**
+#### **AND - Et bit à bit avec l'accumulator**
 
 Drapeaux affecté : N Z
-
-|             |             |         |            |            |
+| | | | | |
 | ----------- | ----------- | ------- | ---------- | ---------- |
-| **Mode**    | **Syntaxe** | **HEX** | **Taille** | **Cycles** |
-| Immediate   | AND #$44    | $29     | 2          | 2          |
-| Zero Page   | AND $44     | $25     | 2          | 3          |
-| Zero Page,X | AND $44,X   | $35     | 2          | 4          |
-| Absolute    | AND $4400   | $2D     | 3          | 4          |
-| Absolute,X  | AND $4400,X | $3D     | 3          | 4+         |
-| Absolute,Y  | AND $4400,Y | $39     | 3          | 4+         |
-| Indirect,X  | AND ($44,X) | $21     | 2          | 6          |
-| Indirect,Y  | AND ($44),Y | $31     | 2          | 5+         |
+| **Mode** | **Syntaxe** | **HEX** | **Taille** | **Cycles** |
+| Immediate | AND #$44 | $29 | 2 | 2 |
+| Zero Page | AND $44 | $25 | 2 | 3 |
+| Zero Page,X | AND $44,X | $35 | 2 | 4 |
+| Absolute | AND $4400 | $2D | 3 | 4 |
+| Absolute,X | AND $4400,X | $3D | 3 | 4+ |
+| Absolute,Y | AND $4400,Y | $39 | 3 | 4+ |
+| Indirect,X | AND ($44,X) | $21 | 2 | 6 |
+| Indirect,Y | AND ($44),Y | $31 | 2 | 5+ |
 
 - add 1 cycle if page boundary crossed
 
