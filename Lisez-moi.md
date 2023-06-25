@@ -1,6 +1,6 @@
 # NESEmu
 
-NESEmu est un émulateur pour la console de nintendo NES. Il sera disponible pour les systèmes suivants :
+NESEmu est un émulateur pour la console de nintendo NES/Famicom. Il sera disponible pour les systèmes suivants :
 
 - Windows
 - Linux
@@ -33,13 +33,15 @@ NESEmu est un émulateur pour la console de nintendo NES. Il sera disponible pou
 
 # Introduction
 
-La Nintendo Entertainment System (NES) est une console de jeux vidéo 8 bits de troisième génération produite par Nintendo. Elle a été commercialisée pour la première fois au Japon en 1983 sous le nom de Family Computer (FC), communément appelée Famicom. La NES, une version redessinée, a été lancée sur les marchés tests américains le 18 octobre 1985, avant de devenir largement disponible en Amérique du Nord et dans d'autres pays.
+La Nintendo Entertainment System (NES) est une console de jeux vidéo 8 bits de troisième génération produite par Nintendo. Elle a été commercialisée pour la première fois au Japon en 1983 sous le nom de Family Computer (FC), communément appelée **Famicom**. La NES, une version redessinée, a été lancée sur les marchés tests américains le 18 octobre 1985, avant de devenir largement disponible en Amérique du Nord et dans d'autres pays.
 
-![NES](img/NES-Console-Set.png?raw=true)
-** - NES : lancée le 18/10/1985 aux États-Unis et le 01/09/1985 en Europe.**
+|     ![Famicom](img/Famicon.png?raw=true)     |
+| :------------------------------------------: |
+| **Famicom : lancée le 15/07/1983 au Japon.** |
 
-![Famicom](img/Famicon.png?raw=true)
-** - Famicom : lancée le 15/07/1983 au Japon.**
+|                 ![NES](img/NES-Console-Set.png?raw=true)                  |
+| :-----------------------------------------------------------------------: |
+| **NES : lancée le 18/10/1985 aux États-Unis et le 01/09/1985 en Europe.** |
 
 # Recherche de documentation
 
@@ -47,11 +49,13 @@ La chose la plus importante avant de commencer à écrire la moindre ligne de co
 
 # Entrailles de la console
 
-![PCB](img/motherboard.png?raw=true)
-**Carte mère de la NES version NTSC**
+| ![PCB](img/motherboard.png?raw=true)  |
+| :-----------------------------------: |
+| **Carte mère de la NES version NTSC** |
 
-![PCB](img/Famicom-motherboard.jpg?raw=true)
-**Carte mère de la Famicom**
+| ![PCB](img/Famicom-motherboard.jpg?raw=true) |
+| :------------------------------------------: |
+|         **Carte mère de la Famicom**         |
 
 # Schémas de la console
 
