@@ -45,9 +45,9 @@ La chose la plus importante avant de commencer à écrire la moindre ligne de co
 
 # Entrailles de la console
 
-![PCB](img/motherboard.png?raw=true)** Carte mère de la NES version NTSC **
+![PCB](img/motherboard.png?raw=true)**Carte mère de la NES version NTSC**
 
-![PCB](img/Famicom-motherboard.jpg?raw=true)** Carte mère de la Famicom **
+![PCB](img/Famicom-motherboard.jpg?raw=true)**Carte mère de la Famicom**
 
 # Schémas de la console
 
