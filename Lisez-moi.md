@@ -6,6 +6,7 @@
   - [Le processeur 6502](#le-processeur-6502)
     - [Diagrammes](#diagrammes)
     - [Les registres](#les-registres)
+      - [Le registre d'état](#le-registre-détat)
       - [L'accumulateur](#laccumulateur)
     - [Les modes d'addressage](#les-modes-dadressage)
       - [Accumulateur](#)
@@ -56,6 +57,8 @@ La chose la plus importante avant de commencer à écrire la moindre ligne de co
 ### Diagrammes
 
 ### Les registres du 6502
+
+#### Le registre d'état
 
 #### L'accumulateur
 
