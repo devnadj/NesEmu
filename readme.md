@@ -54,7 +54,12 @@ La chose la plus importante avant de commencer à écrire la moindre ligne de co
 
 # Le processeur
 
-Le processeur de la NES est un Ricoh 2A03 fonctionnant à 1,79 MHz pour la version NTSC et un Ricoh 2A07 fonctionnant à 1,66MHz pour la version PAL. Il est basé sur le populaire 6502 processeur MOS de 8 bits 6502, connu notamment pour s'être retrouvé dans les Apple I et Apple II ou le Commodore 64.
+Le processeur de la NES est un Ricoh 2A03 (appelé aussi RP2A03) fonctionnant à 1,79 MHz pour la version NTSC et un Ricoh 2A07 (appelé aussi RP2A07) fonctionnant à 1,66MHz pour la version PAL. Il est basé sur le populaire 6502 processeur MOS de 8 bits 6502, connu notamment pour s'être retrouvé dans les Apple I et Apple II ou le Commodore 64.
+
+|                |                     |                     |
+| -------------- | :-----------------: | :-----------------: |
+|                |   **Version PAL**   |  **Version NTSC**   |
+| **Processeur** | Ricoh 2A07 / RP2A03 | Ricoh 2A03 / RP2A07 |
 
 ## Le processeur 6502
 
