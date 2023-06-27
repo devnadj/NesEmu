@@ -1,28 +1,37 @@
 # NESEmu
 
+- [NESEmu](#nesemu)
 - [Introduction](#introduction)
+- [Recherche de documentation](#recherche-de-documentation)
+- [Entrailles de la console](#entrailles-de-la-console)
 - [Schémas de la console](#schémas-de-la-console)
-- [Le processeur](#le-processeur)
+  - [La puce Ricoh 2A03/2A07 (Processeur + APU)](#la-puce-ricoh-2a032a07-processeur--apu)
+  - [La puce Ricoh 2C02 (PPU)](#la-puce-ricoh-2c02-ppu)
+- [Émulation](#émulation)
   - [Le processeur 6502](#le-processeur-6502)
     - [Diagrammes](#diagrammes)
-    - [Les registres](#les-registres)
+    - [Les registres du 6502](#les-registres-du-6502)
       - [Le registre d'état](#le-registre-détat)
       - [L'accumulateur](#laccumulateur)
-    - [Les modes d'addressage](#les-modes-dadressage)
-      - [Accumulateur](#)
+    - [Les modes d'adressage](#les-modes-dadressage)
+      - [Adressage](#adressage)
       - [Adressage immédiat](#adressage-immédiat)
-      - [Absolute]()
-      - [Absolute, X]()
-      - [Absolute, Y]()
-      - [Zero Page]()
-      - [Implied]()
+      - [Adressage absolue](#adressage-absolue)
+      - [Adressage absolu](#adressage-absolu)
+    - [Les vecteurs d'interruption](#les-vecteurs-dinterruption)
+      - [Reset](#reset)
+      - [IRQ](#irq)
+    - [NMI](#nmi)
     - [Les instructions du 6502](#les-instructions-du-6502)
-      - [ADC](#adc-add-with-carry---addition-avec-retenue)
-      - [AND](#and---et-bit-à-bit-avec-laccumulator)
-    - NTSC version, named Ricoh 2A03 or RP2A03, running at 1.79 MHz.
-    - PAL version, named Ricoh 2A07 or RP2A07, running at 1.66 MHz.
-    - [Les cartouches de jeu](#les-cartouches)
-    - [Les manettes](#les-manettes)
+      - [**ADC (ADd with Carry) - Addition avec retenue**](#adc-add-with-carry---addition-avec-retenue)
+      - [**AND - Et bit à bit avec l'accumulator**](#and---et-bit-à-bit-avec-laccumulator)
+      - [**ASL (Arithmetic Shift Left)**](#asl-arithmetic-shift-left)
+      - [**BIT (test BITs)**](#bit-test-bits)
+      - [**Instructions de branchement**](#instructions-de-branchement)
+    - [Émulation du 6502](#émulation-du-6502)
+- [Le PPU](#le-ppu)
+- [Les cartouches](#les-cartouches)
+- [Les manettes](#les-manettes)
 
 # Introduction
 
@@ -52,17 +61,27 @@ La chose la plus importante avant de commencer à écrire la moindre ligne de co
 
 # Schémas de la console
 
-# Le processeur
+## La puce Ricoh 2A03/2A07 (Processeur + APU)
 
-Le processeur de la NES est un Ricoh 2A03 (appelé aussi RP2A03) fonctionnant à 1,79 MHz pour la version NTSC et un Ricoh 2A07 (appelé aussi RP2A07) fonctionnant à 1,66MHz pour la version PAL. Il est basé sur le populaire 6502 processeur MOS de 8 bits 6502, connu notamment pour s'être retrouvé dans les Apple I et Apple II ou le Commodore 64.
+La puce 2A03/2A07 a été créée par Ricoh et intègre un processeur et un puce de génération sonore. Ce processeur est basé sur le 6502 (connu notamment pour s'être retrouvé dans les Apple I & II ou le Commodore 64) et la puce sonore est appelée APU pour Audio Processing Unit (soit unité de traitement audio).
 
-|                |                     |                     |
-| -------------- | :-----------------: | :-----------------: |
-|                |   **Version PAL**   |  **Version NTSC**   |
-| **Processeur** | Ricoh 2A07 / RP2A07 | Ricoh 2A03 / RP2A03 |
-| **Fréquence**  |      1,66 MHz       |      1,79 MHz       |
+|               |                     |                     |
+| ------------- | :-----------------: | :-----------------: |
+|               |   **Version PAL**   |  **Version NTSC**   |
+| **Puce**      | Ricoh 2A07 / RP2A03 | Ricoh 2A07 / RP2A07 |
+| **Fréquence** |      1,66 MHz       |      1,79 MHz       |
+
+Le processeur qui compose le 2A03/2A07 ne possède pas le mode BCD alors que celui-ci est présent dans le 6502. C'est la seule différence entre les deux puces.
+
+## La puce Ricoh 2C02 (PPU)
+
+La puce graphique de la NES génère un signal composite de 240 lignes de pixels, destiné à être reçu par un téléviseur.
+
+# Émulation
 
 ## Le processeur 6502
+
+Comme nous l'avons vu, la puce 2A03/2A07 est basée pour la partie processeur sur le fameux 6502 castré de sa partie BCD. Pour émuler le processeur de la NES, il est donc évident de se baser sur le 6502. D'ailleurs la littérature sur ce processeur est très abondante, et nous ne manquerons pas de ressources. Par ailleurs, nous l'émulerons complètement (mode BCD compris), ce qui sera utile si nous décidons de travailler sur d'autres machines à l'avenir composées de ce processeur.
 
 ### Diagrammes
 
