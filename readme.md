@@ -59,7 +59,7 @@ Le processeur de la NES est un Ricoh 2A03 (appelé aussi RP2A03) fonctionnant à
 |                |                     |                     |
 | -------------- | :-----------------: | :-----------------: |
 |                |   **Version PAL**   |  **Version NTSC**   |
-| **Processeur** | Ricoh 2A07 / RP2A03 | Ricoh 2A03 / RP2A07 |
+| **Processeur** | Ricoh 2A03 / RP2A03 | Ricoh 2A07 / RP2A07 |
 
 ## Le processeur 6502
 
