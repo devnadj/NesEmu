@@ -29,7 +29,8 @@
       - [**BIT (test BITs)**](#bit-test-bits)
       - [**Instructions de branchement**](#instructions-de-branchement)
     - [Émulation du 6502](#émulation-du-6502)
-- [Le PPU](#le-ppu)
+  - [Le PPU](#le-ppu)
+    - [Émulation du PPU](#émulation-du-ppu)
 - [Les cartouches](#les-cartouches)
 - [Les manettes](#les-manettes)
 
@@ -60,6 +61,12 @@ La chose la plus importante avant de commencer à écrire la moindre ligne de co
 |         **Carte mère de la Famicom**         |
 
 # Schémas de la console
+
+Dans cette partie nous survolons les composants de la NES. Ils seront étudiés bien plus en détail dans la partie concernant chacun d'entre eux et aussi dans leur émulation.
+
+| ![Schéma de la console](/img/nes-diagramme.png?raw=true) |
+| :------------------------------------------------------: |
+|              **Schéma simplifié de la NES**              |
 
 ## La puce Ricoh 2A03/2A07 (Processeur + APU)
 
@@ -222,7 +229,13 @@ l'instruction BVC prendra 3 cycles quelle que soit l'adresse à laquelle elle se
 
 ### Émulation du 6502
 
-# Le PPU
+## La puce sonore du 2A03/2A07
+
+### Émulation de la puce sonore
+
+## Le PPU
+
+### Émulation du PPU
 
 # Les cartouches
 
