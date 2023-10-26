@@ -29,6 +29,8 @@
       - [**BIT (test BITs)**](#bit-test-bits)
       - [**Instructions de branchement**](#instructions-de-branchement)
     - [Émulation du 6502](#émulation-du-6502)
+  - [La puce sonore du 2A03/2A07](#la-puce-sonore-du-2a032a07)
+    - [Émulation de la puce sonore](#émulation-de-la-puce-sonore)
   - [Le PPU](#le-ppu)
     - [Émulation du PPU](#émulation-du-ppu)
 - [Les cartouches](#les-cartouches)
@@ -94,9 +96,14 @@ Comme nous l'avons vu, la puce 2A03/2A07 est basée pour la partie processeur su
 
 ### Les registres du 6502
 
-#### Le registre d'état
+#### L'accumulateur (A)
 
-#### L'accumulateur
+L'accumulateur est un registre huits bits. Un certain nombre d'opérations arithmétiques ou logiques sont exclusives à l'accumulateur, en l'occurence : ADC, SBC, AND, ORA, EOR.
+
+#### Le registre d'état (P)
+
+Le registre d'état est un registre de huits bits. Il est mis à jour automatiquement à jour au fur et à mesure de l'exécution des instructions.
+
 
 ### Les modes d'adressage
 
