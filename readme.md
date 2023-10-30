@@ -132,7 +132,7 @@ Nous entrerons plus en détail sur le fonctionnement de chacun de ces drapeaux l
 Ce registre de 16 bits contient l'adresse physique en cours d'exécution. Il est mis à jour automatiquement lors du déroulement d'un programme, ou il est peut être modifié directement après une interruption (NMI, Reset, IRQ / BRK) soit en utilisant une instruction de branchement RTS, JMP, JSR, Branch...
 
 ### Le pointeur de pile (S)
-Le processeur 6502 prend en charge une pile de 256 octets située entre 01 00 et 01 FF. Le pointeur de pile est un registre de 8 bits et contient le prochain emplacement libre sur la pile. L'emplacement de la pile est fixe et ne peut pas être modifié. Pousser des éléments sur la pile entraine la décrémentation du pointeur de pile, et à l'inverse extraire des éléments sur la pile entraine la décrémentation du pointeur de pile. Attention toutefois, tout débordement de pile n'est pas indiqué par le processeur et peut créer des erreurs.
+Le processeur 6502 prend en charge une pile de 256 octets située entre 0100 et 01FF. Le pointeur de pile est un registre de 8 bits et contient le prochain emplacement libre sur la pile. L'emplacement de la pile est fixe et ne peut pas être modifié. Pousser des éléments sur la pile entraine la décrémentation du pointeur de pile, et à l'inverse extraire des éléments sur la pile entraine l'incrémentation du pointeur de pile. Attention toutefois, tout débordement de pile n'est pas indiqué par le processeur et peut créer des erreurs.
 
 
 ### Les modes d'adressage
