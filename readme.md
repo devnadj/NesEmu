@@ -105,28 +105,35 @@ Le registre d'état est un registre de huits bits. Il est mis à jour automatiqu
 |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |
 |     |  N  |  V  |  *  |  B  |  D  |  I  |  Z  |  C  |
 
-#### Drapeau N (Negative)
-Ce drapeau est positionné à 1 lorsque le bit 7 résultantt d'une opéaration logique ou arithmétique passe à 1, c'est à dire si le résultat d'une opération logique ou mathématique est négatif. Pour rappel un nombre est considéré comme négatif lorsque le bit le plus à gauche de ce nombre est égal à 1. Ici nous parlons de mot de 8 bits, donc lorsque le bit 7 est à 1.
+- #### Drapeau C (Carry)
+  Ce drapeau permet d'indiquer qu'une opération (ADC, SBC, CMP, ASL, LSR, ROL, ROR) a généré une retenue. Ce drapeau peut être modifié directement avec les instruction SEC (SEt Carry) et CLC (CLear Carry).
 
-#### Drapeau V (oVerflow)
-Ce drapeau est positionné à 1 lors d'un débordement lors d'une opération (en général une opération d'addition ou de soustraction). Nous entrerons plus en détail plus loin lorsque nous devrons générer le code permettant de positionner où non ce drapeau lors d'une opération.
+- #### Drapeau Z (Zero)
+  Ce drapeau permet d'indiquer que le resultat d'une opération est égal à zéro.
 
-#### Drapeau I
-Lorsque ce drapeau est positionné à 1, toutes les interruptions à l'exception de NMI sont inhibées. Ce drapeau est modifiable grâce aux instructions SEI (Set Interrupt Disable) et CLI (Clear Interrupt Disable). Tant que ce drapeau est a
+- #### Drapeau I
+  lorsque ce drapeau est positionné à 1, toutes les interruptions à l'exception de NMI sont inhibées. Ce drapeau est modifiable grâce aux instructions SEI (Set Interrupt Disable) et CLI (Clear Interrupt Disable). Tant que ce drapeau est a
 
+- #### Drapeau D
+  Ce drapeau est utilisé pour sélectionner le mode binaire codé décimal (BCD : Binary Coded Decimal) pour faciliter les opération arithmétique en base 10. Comme déjà précisé plus haut, le processeur de la NES, le mode décimal est désactivé, mais il sera tout de même implémenter.
 
-#### Drapeau B (Break)
+- #### Drapeau B (Break)
 
-#### Drapeau D
-Ce drapeau  .... Comme déjà précisé plus haut, le processeur de la NES, le mode décimal est désactivé.
+- #### Drapeau V (oVerflow)
+  Ce drapeau est positionné à 1 lors d'un débordement lors d'une opération (en général une opération d'addition ou de soustraction). Nous entrerons plus en détail plus loin lorsque nous devrons générer le code permettant de positionner où non ce drapeau lors d'une opération.
 
-#### Drapeau Z (Zero)
-Ce drapeau permet d'indiquer que le resultat d'une opération est égal à zéro.
+- #### Drapeau N (Negative)
+  Ce drapeau est positionné à 1 lorsque le bit 7 résultantt d'une opéaration logique ou arithmétique passe à 1, c'est à dire si le résultat d'une opération logique ou mathématique est négatif. Pour rappel un nombre est considéré comme négatif lorsque le bit le plus à gauche de ce nombre est égal à 1. Ici nous parlons de mot de 8 bits, donc lorsque le bit 7 est à 1.
 
-#### Drapeau C (Carry)
-Ce drapeau permet d'indiquer qu'une opération (ADC, SBC, CMP, ASL, LSR, ROL, ROR) a généré une retenue. Ce drapeau peut être modifié directement avec les instruction SEC (SEt Carry) et CLC (CLear Carry).
+Nous entrerons plus en détail sur le fonctionnement de chacun de ces drapeaux lors du codage des instructions, celles-ci modifiant allégrement les drapeaux.
 
 ### Le compteur de programme (PC)
+
+Ce registre de 16 bits contient l'adresse physique en cours d'exécution. Il est mis à jour automatiquement lors du déroulement d'un programme, ou il est peut être modifié directement après une interruption (NMI, Reset, IRQ / BRK) soit en utilisant une instruction de branchement RTS, JMP, JSR, Branch...
+
+### Le pointeur de pile (S)
+Le processeur 6502 prend en charge une pile de 256 octets située entre 01 00 et 01 FF. Le pointeur de pile est un registre de 8 bits et contient le prochain emplacement libre sur la pile. L'emplacement de la pile est fixe et ne peut pas être modifié. Pousser des éléments sur la pile entraine la décrémentation du pointeur de pile, et à l'inverse extraire des éléments sur la pile entraine la décrémentation du pointeur de pile. Attention toutefois, tout débordement de pile n'est pas indiqué par le processeur et peut créer des erreurs.
+
 
 ### Les modes d'adressage
 
