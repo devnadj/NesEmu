@@ -95,43 +95,38 @@ Comme nous l'avons vu, la puce 2A03/2A07 est basée pour la partie processeur su
 ### Diagrammes
 
 ### Les registres du 6502
-----
-
 #### L'accumulateur (A)
-----
-
 L'accumulateur est un registre huits bits. Un certain nombre d'opérations arithmétiques ou logiques sont exclusives à l'accumulateur, en l'occurence : ADC, SBC, AND, ORA, EOR.
 
 #### Le registre d'état (P)
-----
 Le registre d'état est un registre de huits bits. Il est mis à jour automatiquement à jour au fur et à mesure de l'exécution des instructions. Pour cela, chacun des bits le constituant a une signification particulière. On appelera drapeau chacun des bits signifcatifs du registre d'état.
-
 
 | bit |  7  |  6  |  5  |  4  |  3  |  2  |  1  |  0  |
 |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |
 |     |  N  |  V  |  *  |  B  |  D  |  I  |  Z  |  C  |
 
-
 #### Drapeau N (Negative)
-----
-Ce drapeau est position à 1, lorsque le bit 7 résultantt d'une opéaration logique ou arithmétique passe à 1, c'est à dire si le résultat d'une opération logique ou mathématique est négatif. Pour rappel un nombre est considéré comme négatif lorsque le bit le plus à gauche de ce nombre est égal à 1. Ici nous parlons de mot de 8 bits, donc lorsque le bit 7 est à 1.
+Ce drapeau est positionné à 1 lorsque le bit 7 résultantt d'une opéaration logique ou arithmétique passe à 1, c'est à dire si le résultat d'une opération logique ou mathématique est négatif. Pour rappel un nombre est considéré comme négatif lorsque le bit le plus à gauche de ce nombre est égal à 1. Ici nous parlons de mot de 8 bits, donc lorsque le bit 7 est à 1.
 
 #### Drapeau V (oVerflow)
-----
 Ce drapeau est positionné à 1 lors d'un débordement lors d'une opération (en général une opération d'addition ou de soustraction). Nous entrerons plus en détail plus loin lorsque nous devrons générer le code permettant de positionner où non ce drapeau lors d'une opération.
 
+#### Drapeau I
+Lorsque ce drapeau est positionné à 1, toutes les interruptions à l'exception de NMI sont inhibées. Ce drapeau est modifiable grâce aux instructions SEI (Set Interrupt Disable) et CLI (Clear Interrupt Disable). Tant que ce drapeau est a
 
-#### Drapeau B
-----
+
+#### Drapeau B (Break)
 
 #### Drapeau D
-----
-#### Drapeau I
-----
-#### Drapeau Z
-----
-#### Drapeau C
-----
+Ce drapeau  .... Comme déjà précisé plus haut, le processeur de la NES, le mode décimal est désactivé.
+
+#### Drapeau Z (Zero)
+Ce drapeau permet d'indiquer que le resultat d'une opération est égal à zéro.
+
+#### Drapeau C (Carry)
+Ce drapeau permet d'indiquer qu'une opération (ADC, SBC, CMP, ASL, LSR, ROL, ROR) a généré une retenue. Ce drapeau peut être modifié directement avec les instruction SEC (SEt Carry) et CLC (CLear Carry).
+
+### Le compteur de programme (PC)
 
 ### Les modes d'adressage
 
