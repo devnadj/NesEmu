@@ -134,14 +134,43 @@ Ce registre de 16 bits contient l'adresse physique en cours d'exécution. Il est
 ### Le pointeur de pile (S)
 Le processeur 6502 prend en charge une pile de 256 octets située entre 0100 et 01FF. Ces deux valeurs sont fixées et ne peuvent pas être modifiées. Le pointeur de pile est un registre de 8 bits et contient le prochain emplacement libre sur la pile. Lorsque la pile est vide, la valeur du pointeur de pile est de 00, et pointe donc sur l'adresse 01FF. Lorsque la pile est pleine, la valeur du pointeur de pile est de 255 et celui-ci point alors sur l'emplacement 0100. Pousser des éléments sur la pile entraine la décrémentation du pointeur de pile, et à l'inverse extraire des éléments sur la pile entraine l'incrémentation du pointeur de pile. Attention toutefois, tout débordement de pile n'est pas indiqué par le processeur et peut créer des erreurs.
 
+### Instructions, opérateurs, opérandes, opcode
+
+En assembleur, il y a des opérations et des opérandes. Chaque opération est en général associé à un opérande qui est une variable sur laquelle agit l'opération. L'instruction suivante est plus explicite.
+
+- LDA #25 ; 
+
+LDA est l'opération qui permet de charger une variable dans l'accumulateur. #25 est l'opérande, c'est-à-dire la valeur qu'utilise l'opération pour effectuer cette tâche. Le processeur 6502 est fournit avec un ensemble d'opérations (opcodes). Cela nous conduit au mode d'adressage. En effet si l'instruction précédente permettait de charger une valeur immédiatement dans l'accumateur, il est souvent nécessaire de charger l'accumulateur à partir d'un emplacement mémoire. Pour cela il existe un certain nombre de modes d'adressage.
+
 
 ### Les modes d'adressage
 
-#### Adressage
+Le mode d'adressage est un aspect important d'un microprocesseur et de son jeu d'instructions. Les modes d'adressage définissent la manière dont une opération a accès à son opérande.
 
-#### Adressage immédiat
+- #### Adressage immédiat
 
-#### Adressage absolue
+  La valeur qui suit l'opcode est utilisée comme opérande. 
+
+  Exemples 
+
+  - LDA #3C ; la valeur 3C est chargée dans l'accumulateur
+  - ADC #22 ; la valeur 22 est additionnée au contenu de l'accumulateur
+
+  Pour préciser qu'il s'agit de l'adressage immédiat, la valeur qui suit immédiatement l'instruction est précédée du signe #.
+
+- #### Adressage implicite
+
+  Ce mode d'adressage n'utilise pas d'opérande mais seulement un opcode qui se suffit à elle même. Toutes les instructions de manipulation de drapeaux sont des instructions implicites puisqu'elles n'ont pas besoin d'opérande pour fonctionner.
+
+  Exemples
+
+  - INX ; incrémenter de 1 le contenu du registre X
+  - NOP ; ne rien faire
+  - CLC ; on efface le bit de retenue
+
+#### Adressage direct
+
+Ce mode d'adressage 
 
 #### Adressage absolu
 
