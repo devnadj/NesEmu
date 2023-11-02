@@ -92,6 +92,8 @@ La puce graphique de la NES génère un signal composite de 240 lignes de pixels
 
 Comme nous l'avons vu, la puce 2A03/2A07 est basée pour la partie processeur sur le fameux 6502 castré de sa partie BCD. Pour émuler le processeur de la NES, il est donc évident de se baser sur le 6502. D'ailleurs la littérature sur ce processeur est très abondante, et nous ne manquerons pas de ressources. Par ailleurs, nous l'émulerons complètement (mode BCD compris), ce qui sera utile si nous décidons de travailler sur d'autres machines à l'avenir composées de ce processeur.
 
+Le 6502 est un processeur 8 bits, c'est-à-dire que sont bus de données est de 8 bits et qu'il traite des mots de 8 bits. L'ensemble des opérations arithmétiques et logiques du processeur travaillent sur des mots de 8 bits. Le bus d'adresse quant à lui est de 16 bits, de ce fait le processeur est capable d'adresser au maximum 2<sup>16</sup> = 65 536 positions mémoires.
+
 ### Diagrammes
 
 ### Les registres du 6502
@@ -101,9 +103,10 @@ L'accumulateur est un registre huits bits. Un certain nombre d'opérations arith
 #### Le registre d'état (P)
 Le registre d'état est un registre de huits bits. Il est mis à jour automatiquement à jour au fur et à mesure de l'exécution des instructions. Pour cela, chacun des bits le constituant a une signification particulière. On appelera drapeau chacun des bits signifcatifs du registre d'état.
 
-| bit |  7  |  6  |  5  |  4  |  3  |  2  |  1  |  0  |
+
+| Bit |  7  |  6  |  5  |  4  |  3  |  2  |  1  |  0  |
 |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |
-|     |  N  |  V  |  *  |  B  |  D  |  I  |  Z  |  C  |
+|  Drapeau   |  N  |  V  |  *  |  B  |  D  |  I  |  Z  |  C  |
 
 - #### Drapeau C (Carry)
   Ce drapeau permet d'indiquer qu'une opération (ADC, SBC, CMP, ASL, LSR, ROL, ROR) a généré une retenue. Ce drapeau peut être modifié directement avec les instruction SEC (SEt Carry) et CLC (CLear Carry).
@@ -129,10 +132,11 @@ Nous entrerons plus en détail sur le fonctionnement de chacun de ces drapeaux l
 
 ### Le compteur de programme (PC)
 
-Ce registre de 16 bits contient l'adresse physique en cours d'exécution. Il est mis à jour automatiquement lors du déroulement d'un programme, ou il est peut être modifié directement après une interruption (NMI, Reset, IRQ / BRK) soit en utilisant une instruction de branchement RTS, JMP, JSR, Branch...
+Ce registre de 16 bits contient l'adresse physique en cours d'exécution. Il est mis à jour automatiquement lors du déroulement d'un programme, ou il est peut être modifié directement après une interruption (NMI, Reset, IRQ / BRK) soit en utilisant une instruction de branchement RTS, JMP, JSR, Branch... Sa taille étant de 16 bits, il est possible d'adresser au maximum 65 536 octets (2<sup>16</sup>).
 
 ### Le pointeur de pile (S)
-Le processeur 6502 prend en charge une pile de 256 octets située entre 0100 et 01FF. Ces deux valeurs sont fixées et ne peuvent pas être modifiées. Le pointeur de pile est un registre de 8 bits et contient le prochain emplacement libre sur la pile. Lorsque la pile est vide, la valeur du pointeur de pile est de 00, et pointe donc sur l'adresse 01FF. Lorsque la pile est pleine, la valeur du pointeur de pile est de 255 et celui-ci point alors sur l'emplacement 0100. Pousser des éléments sur la pile entraine la décrémentation du pointeur de pile, et à l'inverse extraire des éléments sur la pile entraine l'incrémentation du pointeur de pile. Attention toutefois, tout débordement de pile n'est pas indiqué par le processeur et peut créer des erreurs.
+Le 6502 prend en charge une pile de 256 octets située entre 0100 et 01FF. Ces deux valeurs sont fixées et ne peuvent pas être modifiées. La pile permet de sauvegarder diverses données lors d'une interruption, ou de sauvegarder l'adresse courante lors d'un saut à sous-programme. Cela permet au processeur lors du retour de ce sous-programme de continuer le déroulement à l'adresse d'origine.
+Le pointeur de pile est un registre de 8 bits et contient le prochain emplacement libre sur la pile. Lorsque la pile est vide, la valeur du pointeur de pile est de 00, et pointe donc sur l'adresse 01FF (01FF - 00). Lorsque la pile est pleine, la valeur du pointeur de pile est de 255 et celui-ci point alors sur l'emplacement 0100 (01FF - FF). Pousser des éléments sur la pile entraine la décrémentation du pointeur de pile, et à l'inverse extraire des éléments sur la pile entraine l'incrémentation du pointeur de pile. Attention toutefois, tout débordement de pile n'est pas indiqué par le processeur et peut créer des erreurs.
 
 ### Instructions, opérateurs, opérandes, opcode
 
@@ -168,11 +172,50 @@ Le mode d'adressage est un aspect important d'un microprocesseur et de son jeu d
   - NOP ; ne rien faire
   - CLC ; on efface le bit de retenue
 
-#### Adressage direct
-
-Ce mode d'adressage 
-
 #### Adressage absolu
+
+L'adressage absolu consiste à récupérer la valeur (8 bits) située à l'adresse (16 bits) qui suit l'opcode
+
+Exemple :
+
+Mise en situation - soit le contenu mémoire compris entre 12FE et 1301
+
+| Adresse | Contenu |
+|:-------:| :-----: |
+| 12 FE   | 1E      |
+| 12 FF   | 2F      |
+| 13 00   | 31      |
+| 13 01   | 00      |
+
+Ensuite on décide d'exécuter les deux instructions suivantes :
+
+- LDA 12FF
+- LDX 1300
+
+LDA charge dans l'accumulateur la valeur située à l'adresse 12FF, et LDX charge dans le registre X la valeur situé à l'adresse 1300.
+Après l'exécution de ces deux instructions, l'accumulateur A contiendra 2F et le registre d'index X contiendra 31.
+
+#### Adressage en page zéro
+
+L'adressage en page zéro est très similaire à l'adressage absolu. Dans l'adressage absolu, l'opcode est suivi de deux octets qui donne l'adresse à laquelle récupérer la valeur à utiliser dans tout l'espace adressable disponible. L'adressage en page zéro va se limiter à récupérer la valeur situé entre les adresses 00 00 et 00 FF. Comme la plage d'adresse n'est que de 256 positions possibles (soit 8 bits), au lieu de fournir comme ce sertait le cas avec l'adressage absolu une valeur sur 16 bits, ici on se limitera à une seule valeur de 8 bits. Le fait de n'avoir à récupérer qu'un seul octet au lieu de deux, se traduit par un code plus court et une augmentation significative de son efficacité.
+
+Mise en situation - soit le contenu mémoire compris entre 00 1E et 00 21
+
+| Adresse | Contenu |
+|:-------:| :-----: |
+| 00 1E   | 1E      |
+| 00 1F   | 2F      |
+| 00 20   | 31      |
+| 00 21   | 00      |
+
+Ensuite on décide d'exécuter les instructions suivantes :
+
+- LDA 1F
+- LDX 20
+
+Le contenu de l'accumulateur sera de 2F et le contenu du registre d'index X sera de 31.
+
+
 
 ### Les vecteurs d'interruption
 
