@@ -98,11 +98,10 @@ Le 6502 est un processeur 8 bits, c'est-à-dire que sont bus de données est de 
 
 ### Les registres du 6502
 #### L'accumulateur (A)
-L'accumulateur est un registre huits bits. Un certain nombre d'opérations arithmétiques ou logiques sont exclusives à l'accumulateur, en l'occurence : ADC, SBC, AND, ORA, EOR.
+L'accumulateur est un registre 8 bits. Un certain nombre d'opérations arithmétiques ou logiques sont exclusives à l'accumulateur, en l'occurence : ADC, SBC, AND, ORA, EOR.
 
 #### Le registre d'état (P)
-Le registre d'état est un registre de huits bits. Il est mis à jour automatiquement à jour au fur et à mesure de l'exécution des instructions. Pour cela, chacun des bits le constituant a une signification particulière. On appelera drapeau chacun des bits signifcatifs du registre d'état.
-
+Le registre d'état est un registre de 8 bits. Il est mis à jour automatiquement au fur et à mesure de l'exécution des instructions. Pour cela, chacun des bits (qu'on appelera drapeau) le constituant a une signification particulière. 
 
 | Bit |  7  |  6  |  5  |  4  |  3  |  2  |  1  |  0  |
 |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |
@@ -118,12 +117,12 @@ Le registre d'état est un registre de huits bits. Il est mis à jour automatiqu
   lorsque ce drapeau est positionné à 1, toutes les interruptions à l'exception de NMI sont inhibées. Ce drapeau est modifiable grâce aux instructions SEI (Set Interrupt Disable) et CLI (Clear Interrupt Disable). Tant que ce drapeau est a
 
 - #### Drapeau D
-  Ce drapeau est utilisé pour sélectionner le mode binaire codé décimal (BCD : Binary Coded Decimal) pour faciliter les opération arithmétique en base 10. Comme déjà précisé plus haut, le processeur de la NES, le mode décimal est désactivé, mais il sera tout de même implémenter.
+  Ce drapeau est utilisé pour sélectionner le mode décimal (BCD : Binary Coded Decimal) pour faciliter les opération arithmétique en base 10. Comme déjà précisé plus haut, le processeur de la NES, le mode décimal est désactivé, mais il sera tout de même implémenté.
 
 - #### Drapeau B (Break)
 
 - #### Drapeau V (oVerflow)
-  Ce drapeau est positionné à 1 lors d'un débordement lors d'une opération (en général une opération d'addition ou de soustraction). Nous entrerons plus en détail plus loin lorsque nous devrons générer le code permettant de positionner où non ce drapeau lors d'une opération.
+  Ce drapeau est positionné à 1 lors d'un débordement lors d'une opération (en général une opération d'addition ou de soustraction). Nous entrerons plus en détail plus loin lorsque nous devrons générer le code permettant de gérer les débordements.
 
 - #### Drapeau N (Negative)
   Ce drapeau est positionné à 1 lorsque le bit 7 résultantt d'une opéaration logique ou arithmétique passe à 1, c'est à dire si le résultat d'une opération logique ou mathématique est négatif. Pour rappel un nombre est considéré comme négatif lorsque le bit le plus à gauche de ce nombre est égal à 1. Ici nous parlons de mot de 8 bits, donc lorsque le bit 7 est à 1.
@@ -135,7 +134,7 @@ Nous entrerons plus en détail sur le fonctionnement de chacun de ces drapeaux l
 Ce registre de 16 bits contient l'adresse physique en cours d'exécution. Il est mis à jour automatiquement lors du déroulement d'un programme, ou il est peut être modifié directement après une interruption (NMI, Reset, IRQ / BRK) soit en utilisant une instruction de branchement RTS, JMP, JSR, Branch... Sa taille étant de 16 bits, il est possible d'adresser au maximum 65 536 octets (2<sup>16</sup>).
 
 ### Le pointeur de pile (S)
-Le 6502 prend en charge une pile de 256 octets située entre 0100 et 01FF. Ces deux valeurs sont fixées et ne peuvent pas être modifiées. La pile permet de sauvegarder diverses données lors d'une interruption, ou de sauvegarder l'adresse courante lors d'un saut à sous-programme. Cela permet au processeur lors du retour de ce sous-programme de continuer le déroulement à l'adresse d'origine.
+Le 6502 prend en charge une pile de 256 octets située entre 0100 et 01FF (valeurs qui sont fixes et ne peuvent pas être modifiées). La pile permet de sauvegarder diverses données lors d'une interruption, ou de sauvegarder l'adresse courante lors d'un saut à sous-programme. Cela permet au processeur lors du retour de ce sous-programme de continuer le déroulement à l'adresse d'origine.
 Le pointeur de pile est un registre de 8 bits et contient le prochain emplacement libre sur la pile. Lorsque la pile est vide, la valeur du pointeur de pile est de 00, et pointe donc sur l'adresse 01FF (01FF - 00). Lorsque la pile est pleine, la valeur du pointeur de pile est de 255 et celui-ci point alors sur l'emplacement 0100 (01FF - FF). Pousser des éléments sur la pile entraine la décrémentation du pointeur de pile, et à l'inverse extraire des éléments sur la pile entraine l'incrémentation du pointeur de pile. Attention toutefois, tout débordement de pile n'est pas indiqué par le processeur et peut créer des erreurs.
 
 ### Instructions, opérateurs, opérandes, opcode
@@ -197,7 +196,7 @@ Après l'exécution de ces deux instructions, l'accumulateur A contiendra 2F et 
 
 #### Adressage en page zéro
 
-L'adressage en page zéro est très similaire à l'adressage absolu. Dans l'adressage absolu, l'opcode est suivi de deux octets qui donne l'adresse à laquelle récupérer la valeur à utiliser dans tout l'espace adressable disponible. L'adressage en page zéro va se limiter à récupérer la valeur situé entre les adresses 00 00 et 00 FF. Comme la plage d'adresse n'est que de 256 positions possibles (soit 8 bits), au lieu de fournir comme ce sertait le cas avec l'adressage absolu une valeur sur 16 bits, ici on se limitera à une seule valeur de 8 bits. Le fait de n'avoir à récupérer qu'un seul octet au lieu de deux, se traduit par un code plus court et une augmentation significative de son efficacité.
+L'adressage en page zéro est très similaire à l'adressage absolu. Avec l'adressage absolu, l'opcode est suivi de deux octets qui donne l'adresse à laquelle récupérer la valeur à utiliser dans tout l'espace adressable disponible. L'adressage en page zéro va se limiter à récupérer la valeur situé entre les adresses 00 00 et 00 FF. Comme la plage d'adresse n'est que de 256 positions possibles (soit 8 bits), au lieu de fournir comme ce serait le cas avec l'adressage absolu une valeur sur 16 bits, ici on se limitera à une seule valeur de 8 bits. Le fait de n'avoir à récupérer qu'un seul octet au lieu de deux, se traduit par un code plus court et une augmentation significative de son efficacité.
 
 Mise en situation - soit le contenu mémoire compris entre 00 1E et 00 21
 
